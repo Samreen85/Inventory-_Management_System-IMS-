@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .login-button {
+            background-color: white;
+            color: black;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .login-button:hover {
+            background-color: #f0f0f0;
+        }
+        a {
+            color: lightblue;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        li {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Product List</h1>
+        <a href="{% url 'login' %}" class="login-button">Login</a>
+    </div>
+
+    <!-- Link to add a new product -->
+    <a href="{% url 'product_add' %}">Add New Product</a>
+
+    <!-- List of products -->
+    <ul>
+        {% for product in products %}
+            <li>
+                {% if product.product_id %}
+                    <a href="{% url 'product_detail' product.product_id %}">{{ product.name }}</a>
+                {% else %}
+                    <span>{{ product.name }} (ID missing)</span>
+                {% endif %}
+                - Category: {{ product.category }}, Price: ${{ product.price }}, Stock: {{ product.stock_quantity }}
+
+                <!-- Links to edit and delete the product -->
+                {% if product.product_id %}
+                    <a href="{% url 'product_edit' product.product_id %}">Edit</a>
+                    <a href="{% url 'product_delete' product.product_id %}">Delete</a>
+
+                {% else %}
+                    <span>Edit | Delete</span>
+                {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

@@ -1,0 +1,46 @@
+<!-- myapp/templates/product_detail.html -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ product.name }} Details</title>
+    <style>
+        body {
+            background-color: black;
+            color: white;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center; /* Center the content */
+            align-items: center;
+            height: 100vh; /* Full height of the viewport */
+            margin: 0;
+            text-align: center; /* Center text */
+        }
+        .product-details {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px;
+            border-radius: 5px;
+            width: 300px; /* Set a width for the details box */
+        }
+        a {
+            color: blue; /* Set all links to blue */
+            text-decoration: none; /* Remove underline */
+        }
+        a:hover {
+            text-decoration: underline; /* Underline links on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="product-details">
+        <h1>{{ product.name }}</h1>
+        <p>Category: {{ product.category }}</p>
+        <p>Price: ${{ product.price }}</p>
+        <p>Stock Quantity: {{ product.stock_quantity }}</p>
+        <a href="{% url 'product_edit' product.product_id %}">Edit</a> |
+        <a href="{% url 'product_delete' product.product_id %}">Delete</a> |
+        <a href="{% url 'product_list' %}">Back to Product List</a>
+    </div>
+</body>
+</html>

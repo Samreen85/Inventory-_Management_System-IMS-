@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        body {
+            background-color: black; /* Set background to black */
+            color: white; /* Set text color to white */
+            font-family: Arial, sans-serif; /* Use a clean font */
+            margin: 0; /* Remove default margin */
+            padding: 20px; /* Add padding */
+            display: flex; /* Use flexbox for centering */
+            justify-content: center; /* Center horizontally */
+            align-items: center; /* Center vertically */
+            height: 100vh; /* Full viewport height */
+        }
+        .form-container {
+            background-color: rgba(255, 255, 255, 0.1); /* Semi-transparent background */
+            padding: 20px; /* Padding inside the form container */
+            border-radius: 10px; /* Rounded corners */
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.5); /* Soft shadow */
+            width: 300px; /* Fixed width for the form */
+        }
+        h1 {
+            text-align: center; /* Center the heading */
+            margin-bottom: 20px; /* Space below the heading */
+        }
+        label {
+            margin: 10px 0 5px; /* Margin around labels */
+            display: block; /* Make labels block elements */
+        }
+        input[type="text"], input[type="number"] {
+            width: 100%; /* Full width input */
+            padding: 10px; /* Padding inside inputs */
+            margin-bottom: 15px; /* Space below inputs */
+            border-radius: 5px; /* Rounded corners */
+            border: 1px solid white; /* White border */
+            background-color: rgba(255, 255, 255, 0.2); /* Slightly lighter background */
+            color: white; /* Text color */
+        }
+        button {
+            background-color: white; /* Button background */
+            color: black; /* Button text color */
+            padding: 10px; /* Button padding */
+            border: none; /* Remove border */
+            border-radius: 5px; /* Rounded corners */
+            cursor: pointer; /* Pointer on hover */
+            width: 100%; /* Full width button */
+        }
+        button:hover {
+            background-color: #f0f0f0; /* Button hover effect */
+        }
+        .cancel-link {
+            text-align: center; /* Center the cancel link */
+            display: block; /* Make it block-level */
+            margin-top: 10px; /* Space above the cancel link */
+            color: white; /* Cancel link color */
+            text-decoration: none; /* Remove underline */
+        }
+        .cancel-link:hover {
+            text-decoration: underline; /* Underline on hover */
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1>{{ title }}</h1>
+        <form method="post">
+            {% csrf_token %}
+            <label for="id_name">Name:</label>
+            <input type="text" id="id_name" name="name" placeholder="Enter product name" required>
+
+            <label for="id_category">Category:</label>
+            <input type="text" id="id_category" name="category" placeholder="Enter product category" required>
+
+            <label for="id_price">Price:</label>
+            <input type="number" id="id_price" name="price" placeholder="Enter price" required>
+
+            <label for="id_stock_quantity">Stock quantity:</label>
+            <input type="number" id="id_stock_quantity" name="stock_quantity" placeholder="Enter stock quantity" required>
+
+            <button type="submit">Save</button>
+            <a class="cancel-link" href="{% url 'product_list' %}">Cancel</a>
+        </form>
+    </div>
+</body>
+</html>
