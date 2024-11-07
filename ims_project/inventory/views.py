@@ -32,16 +32,16 @@ def product_add(request):
     return render(request, 'product_form.html', {'form': form})
 
 
-# View for editing a product
 def product_edit(request, product_id):
     product = get_object_or_404(Product, product_id=product_id)
     if request.method == 'POST':
         form = ProductForm(request.POST, instance=product)
         if form.is_valid():
             form.save()
-            return redirect('product_list')
+            return redirect('product_list')  # After saving, redirect to the list page
     else:
-        form = ProductForm(instance=product)
+        form = ProductForm(instance=product)  # Pre-populate form with existing product data
+
     return render(request, 'product_form.html', {'form': form, 'title': 'Edit Product'})
 
 def product_detail(request, product_id):

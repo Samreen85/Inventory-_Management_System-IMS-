@@ -68,19 +68,20 @@
         <h1>{{ title }}</h1>
         <form method="post">
             {% csrf_token %}
+            
             <label for="id_name">Name:</label>
-            <input type="text" id="id_name" name="name" placeholder="Enter product name" required>
+            <input type="text" id="id_name" name="name" placeholder="Enter product name" value="{{ form.name.value }}" required>
 
             <label for="id_category">Category:</label>
-            <input type="text" id="id_category" name="category" placeholder="Enter product category" required>
+            <input type="text" id="id_category" name="category" placeholder="Enter product category" value="{{ form.category.value }}" required>
 
             <label for="id_price">Price:</label>
-            <input type="number" id="id_price" name="price" placeholder="Enter price" required>
+            <input type="number" id="id_price" name="price" placeholder="Enter price" value="{{ form.price.value }}" required>
 
             <label for="id_stock_quantity">Stock quantity:</label>
-            <input type="number" id="id_stock_quantity" name="stock_quantity" placeholder="Enter stock quantity" required>
+            <input type="number" id="id_stock_quantity" name="stock_quantity" placeholder="Enter stock quantity" value="{{ form.stock_quantity.value }}" required>
 
-            <button type="submit">Save</button>
+            <button type="submit">{{ button_text }}</button>
             <a class="cancel-link" href="{% url 'product_list' %}">Cancel</a>
         </form>
     </div>
