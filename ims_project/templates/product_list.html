@@ -41,6 +41,10 @@
         li {
             margin-bottom: 10px;
         }
+        .message {
+            color: red;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
@@ -49,8 +53,19 @@
         <a href="{% url 'login' %}" class="login-button">Login</a>
     </div>
 
-    <!-- Link to add a new product -->
-    <a href="{% url 'product_add' %}">Add New Product</a>
+    <!-- Display messages (if any) -->
+    {% if messages %}
+        <div class="message">
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+        </div>
+    {% endif %}
+
+    <!-- Link to add a new product (visible only for admins) -->
+    {% if user.is_staff %}
+        <a href="{% url 'product_add' %}">Add New Product</a>
+    {% endif %}
 
     <!-- List of products -->
     <ul>
@@ -63,13 +78,14 @@
                 {% endif %}
                 - Category: {{ product.category }}, Price: ${{ product.price }}, Stock: {{ product.stock_quantity }}
 
-                <!-- Links to edit and delete the product -->
-                {% if product.product_id %}
-                    <a href="{% url 'product_edit' product.product_id %}">Edit</a>
-                    <a href="{% url 'product_delete' product.product_id %}">Delete</a>
-
-                {% else %}
-                    <span>Edit | Delete</span>
+                <!-- Links to edit and delete the product (visible only for admins) -->
+                {% if user.is_staff %}
+                    {% if product.product_id %}
+                        <a href="{% url 'product_edit' product.product_id %}">Edit</a>
+                        <a href="{% url 'product_delete' product.product_id %}">Delete</a>
+                    {% else %}
+                        <span>Edit | Delete</span>
+                    {% endif %}
                 {% endif %}
             </li>
         {% endfor %}
